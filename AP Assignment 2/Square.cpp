@@ -16,7 +16,7 @@ float square::calculateArea()
 {
 
 }
-float square::calculatePerimeter()
+float square::calculatePerimeter(int edge)
 {
 
 }

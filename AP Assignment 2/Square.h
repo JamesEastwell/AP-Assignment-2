@@ -10,7 +10,7 @@ private:
 	int edge;
 public:
 	float calculateArea();
-	float calculatePerimeter();
+	float calculatePerimeter(int edge);
 	point calculatePoints();
 	void toSring();
 	square();
