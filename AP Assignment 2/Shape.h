@@ -15,4 +15,5 @@ public:
 	virtual float calculatePerimeter();
 	virtual point calculatePoints();
 	virtual void toString();
+	friend ostream& operator<< (ostream& output, const shape& S);
 };

@@ -14,6 +14,7 @@
 //	toString
 #include "Shape.h"
 #include "Point.h"
+#include <iostream>
 
 using namespace std;
 
@@ -25,3 +26,4 @@ shape::shape()
 	perimeter = 0.0;
 	points;
 }
+

@@ -12,5 +12,4 @@ public:
 	void getY(int& newY);
 	void setY(int newY);
 	void setX(int newX);
-	friend ostream &operator<<(ostream &output, const )
 };

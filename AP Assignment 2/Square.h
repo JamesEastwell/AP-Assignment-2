@@ -12,7 +12,7 @@ public:
 	float calculateArea(int newE);
 	float calculatePerimeter(int edge);
 	point calculatePoints(int x, int y, int e);
-	void toSring();
+	void toString();
 	square();
 	square(int newX, int newY, int newE);
 };

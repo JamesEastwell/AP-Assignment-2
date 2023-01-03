@@ -13,8 +13,7 @@ public:
 	float calculateArea(int height, int width);
 	float calculatePerimeter(int height, int width);
 	point calculatePoints(int x, int y, int h, int w);
-	void toSring();
+	string toString();
 	rectangle();
 	rectangle (int newX, int newY, int newH, int newW);
-	friend ostream& operator<< (ostream& output, const rectangle& r);
 };

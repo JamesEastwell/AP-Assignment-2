@@ -42,7 +42,7 @@ point square::calculatePoints(int x, int y, int e)
 	point leftBottom(x, y + e);
 	points.push_back(leftBottom);
 }
-void square::toSring()
+void square::toString()
 {
 
 }

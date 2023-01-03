@@ -14,7 +14,6 @@ rectangle::rectangle(int newX, int newY, int newH, int newW)
 {
 	area = calculateArea(newH, newW);
 	perimeter = calculatePerimeter(newH, newW);
-	point* leftTop = new point(newX, newY);
 	calculatePoints(newX, newY, newH, newW);
 	isCircular = false;
 }
@@ -38,6 +37,8 @@ float rectangle::calculatePerimeter(int height, int width)
 }
 point rectangle::calculatePoints(int x, int y, int h, int w)
 {
+
+	/*
 	//Pass in rightTop
 	point rightTop(x + w, y);
 	points.push_back(rightTop);
@@ -47,16 +48,12 @@ point rectangle::calculatePoints(int x, int y, int h, int w)
 	//Pass in leftBottom
 	point leftBottom(x, y + h);
 	points.push_back(leftBottom);
+	*/
 }
-void rectangle::toSring()
+string rectangle::toString()
 {
 	for (int i; i <= 4; i++)
 	{
 		cout << points[i]<< endl;
 	}
-}
-ostream& operator << (ostream& output, rectangle& r)
-{
-	output << r << endl;
-	return output;
 }
