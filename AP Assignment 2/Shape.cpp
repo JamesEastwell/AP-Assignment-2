@@ -21,7 +21,7 @@ shape::shape()
 {
 	area = 0;
 	isCircular = false;
-	leftTop(0,0);
+	point leftTop();
 	perimeter = 0.0;
 	points;
 }

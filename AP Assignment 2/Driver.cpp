@@ -23,14 +23,16 @@ GOOD LUCK!
 #include "Movable.h"
 
 #include <iostream>
+#include <ostream>
 #include <string>
+#include <string.h>
 
 using namespace std;
 
 int main()
 {
 	string userCommand;
-	vector <Shape*> shapes;     // this one will hold your shapes
+	vector <shape*> shapes;     // this one will hold your shapes
 	vector <string> parameters; // this one will hold parameters for the commands
 
 
@@ -39,13 +41,20 @@ int main()
 		cout << "Enter the command: ";
 
 		getline(cin, userCommand);
-
+		
 		char* cstr = new char[userCommand.length() + 1];
 
 		strcpy_s(cstr, userCommand.length() + 1, userCommand.c_str());
-
+		
 		// implement a string tokenizer to populate the parameters vector 
 		// check function strtok_s
+		char d[] = " ";
+		char* portion = strtok(cstr, d);
+		while (portion != NULL)
+		{
+			parameters.push_back(portion);
+			portion = strtok(NULL, d);
+		}
 
 		// as a result of the process, parameters[0] should hold your command, followed by your parameters 
 		string command = parameters[0];
@@ -60,29 +69,32 @@ int main()
 			// note that the the parameters vector contains ascii values
 			// HINT: stoi function converts from string to int
 
-			x = parameters[1].c_str(); // fix me! also note that x is not previously defined :(
-			// int y = ...
-			// int h = ...
-			// int w = ...
+			int x = stoi(parameters[1].c_str()); // fix me! also note that x is not previously defined :(
+			int y = stoi(parameters[2].c_str());
+			int h = stoi(parameters[3].c_str());
+			int w = stoi(parameters[4].c_str());
 
-
-			Rectangle* r = new Rectangle(x, y, h, w);
+			rectangle* r = new rectangle(x, y, h, w);
 			shapes.push_back(r);
 			cout << r->toString(); /* instead of this, you may implement operator overloadig and
 									use cout << r which will give you additional points */
 		}
 		else if (command.compare("addS") == 0) {
-			// get parameters
-			// ...
-			Square* s = new Square(x, y, e);
+			int x = stoi(parameters[1].c_str()); // fix me! also note that x is not previously defined :(
+			int y = stoi(parameters[2].c_str());
+			int e = stoi(parameters[3].c_str());
+
+			square* s = new square(x, y, e);
 			shapes.push_back(s);
 			cout << s->toString();
 		}
 
 		if (command.compare("addC") == 0) {
-			// get parameters
-			// ...
-			Circle* c = new Circle(x, y, r);
+			int x = stoi(parameters[1].c_str()); // fix me! also note that x is not previously defined :(
+			int y = stoi(parameters[2].c_str());
+			int r = stoi(parameters[3].c_str());
+
+			circle* c = new circle(x, y, r);
 			shapes.push_back(c);
 			cout << c->toString();
 
@@ -103,7 +115,7 @@ int main()
 
 			// Study the following code. A Shape object is not Movable, but all derived classes are...
 			// you can't automatically type cast from a Shape to a Movable, but you can force a downcasting
-			Movable* m = dynamic_cast<Movable*>(shapes[shapeNo - 1]);
+			movable* m = dynamic_cast<movable*>(shapes[shapeNo - 1]);
 			m->move(x, y);
 			// scale should work similarly...
 

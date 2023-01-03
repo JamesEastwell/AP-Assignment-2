@@ -3,10 +3,10 @@
 
 class shape
 {
-private:
+protected:
 	float area;
 	bool isCircular;
-	point leftTop;
+	point* leftTop = new point();
 	float perimeter;
 	vector <point> points;
 public:

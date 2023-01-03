@@ -9,9 +9,9 @@ class square : public shape, public movable
 private:
 	int edge;
 public:
-	float calculateArea();
+	float calculateArea(int newE);
 	float calculatePerimeter(int edge);
-	point calculatePoints();
+	point calculatePoints(int x, int y, int e);
 	void toSring();
 	square();
 	square(int newX, int newY, int newE);
