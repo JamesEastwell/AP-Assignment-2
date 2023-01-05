@@ -1,15 +1,19 @@
 #pragma once
-
+#include <iostream>
+#include <ostream>
+#include <string>
+#include <string.h>
+#include <vector>
 class point
 {
-protected:
+private:
 	int x;
 	int y;
 public:
 	point();
 	point(int newX, int newY);
-	void getX(int& newX);
-	void getY(int& newY);
+	int getX();
+	int getY();
 	void setY(int newY);
 	void setX(int newX);
 };

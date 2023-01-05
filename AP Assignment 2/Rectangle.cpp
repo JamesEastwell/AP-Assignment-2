@@ -1,7 +1,7 @@
-#include"Shape.h"
-#include"Movable.h"
-#include"Rectangle.h"
-
+#include "Shape.h"
+#include "Rectangle.h"
+#include "Movable.h"
+#include "Point.h"
 #include <iostream>
 #include <ostream>
 #include <string>
@@ -10,50 +10,70 @@
 
 using namespace std;
 
-rectangle::rectangle(int newX, int newY, int newH, int newW)
+rectangle::rectangle(float newX, float newY, float newH, float newW)
 {
-	area = calculateArea(newH, newW);
-	perimeter = calculatePerimeter(newH, newW);
-	calculatePoints(newX, newY, newH, newW);
+	cout << "Creating Rectangle: " << newX<<"," << newY<<endl;
+	point leftTop(newX, newY);
+	points.push_back(leftTop);
+	cout << leftTop.getX()<<","<< leftTop.getY()<< endl;
+	height = newH;
+	width = newW;
+	area = calculateArea();
+	perimeter = calculatePerimeter();
+	calculatePoints();
 	isCircular = false;
 }
 rectangle::rectangle()
 {
+	height = 0;
+	width = 0;
 	area = 0;
 	perimeter = 0;
 	point leftTop(0, 0);
 	isCircular = false;
 	points;
 }
-float rectangle::calculateArea(int height, int width)
+float rectangle::calculateArea()
 {
 	area = height * width;
 	return area;
 }
-float rectangle::calculatePerimeter(int height, int width)
+float rectangle::calculatePerimeter()
 {
 	perimeter = ((height*2)+(width*2));
 	return perimeter;
 }
-point rectangle::calculatePoints(int x, int y, int h, int w)
+void rectangle::calculatePoints()
 {
-
-	/*
 	//Pass in rightTop
-	point rightTop(x + w, y);
+	int tempX = points[0].getX();
+	int tempY = points[0].getY();
+
+	point rightTop(tempX + width, tempY);
 	points.push_back(rightTop);
 	//Pass in rightBottom
-	point rightBottom(x + w, y + h);
+	point rightBottom(tempX + width,tempY + height);
 	points.push_back(rightBottom);
 	//Pass in leftBottom
-	point leftBottom(x, y + h);
-	points.push_back(leftBottom);
-	*/
+	point leftBottom(tempX, tempY + height);
+	points.push_back(leftBottom);	
+}
+void rectangle::move(int newX, int newY) 
+{
+
+}
+void rectangle::scale(float scaleX, float scaleY) 
+{
+
 }
 string rectangle::toString()
 {
-	for (int i; i <= 4; i++)
-	{
-		cout << points[i]<< endl;
-	}
+	//Example:
+	//Rectangle[h=50,w=200] 
+	//Points[(100, 100)(300, 100)(300, 150)(100, 150)]
+	//Area = 10000.0 Perimeter = 500.0
+	string output = " ";
+	output = "Rectangle[h=" + to_string(height) + ", w= " + to_string(width) + "]\nPoints[(" + to_string(points[0].getX()) + ", " + to_string(points[0].getY()) + ")(" + to_string(points[1].getX()) + ", " + to_string(points[1].getY()) + ")(" + to_string(points[2].getX()) + ", " + to_string(points[2].getY()) + ")(" + to_string(points[3].getX()) + ", " + to_string(points[3].getY()) + ")]\nArea = " + to_string(area) + " Perimeter = " + to_string(perimeter);
+	return output;
 }
+

@@ -15,17 +15,18 @@ Otherwise, your code may not pass the test cases...
 GOOD LUCK!
 
 ------------------------------------------------------ */
-
+#pragma warning (disable : 4996)
 #include "Shape.h"
 #include "Circle.h"
 #include "Rectangle.h"
 #include "Square.h"
 #include "Movable.h"
-
+#include "Point.h"
 #include <iostream>
 #include <ostream>
 #include <string>
 #include <string.h>
+#include <vector>
 
 using namespace std;
 
@@ -79,6 +80,7 @@ int main()
 			cout << r->toString(); /* instead of this, you may implement operator overloadig and
 									use cout << r which will give you additional points */
 		}
+		/*
 		else if (command.compare("addS") == 0) {
 			int x = stoi(parameters[1].c_str()); // fix me! also note that x is not previously defined :(
 			int y = stoi(parameters[2].c_str());
@@ -126,14 +128,15 @@ int main()
 		else if (command.compare("display") == 0) {
 			// this is not given in our example, but why don't you implement a display function which shows all objects stored in shapes?
 		}
-
+		*/
 		// do any necessary postprocessing at the end of each loop...
 		// yes, there is some necessary postprocessing...
 		cout << endl << endl;
+
 	}
 
 	cout << "Press any key to continue...";
-	std::getchar();
+	//std::getchar();
 
 	return 0;
 }

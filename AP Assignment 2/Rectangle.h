@@ -1,19 +1,27 @@
 #pragma once
-#include"Shape.h"
-#include"movable.h"
-#include"Point.h"
+#include "Shape.h"
+#include "Movable.h"
+#include "Point.h"
+#include <iostream>
+#include <ostream>
+#include <string>
+#include <string.h>
+#include <vector>
 using namespace std;
 
-class rectangle : public shape, public movable
+class rectangle :  public shape, public movable
 {
-private:
-	int height;
-	int width;
 public:
-	float calculateArea(int height, int width);
-	float calculatePerimeter(int height, int width);
-	point calculatePoints(int x, int y, int h, int w);
+	float height;
+	float width;
+public:
+	float calculateArea();
+	float calculatePerimeter();
+	void calculatePoints();
 	string toString();
+	//create move and scale
+	void move(int newX, int newY);
+	void scale(float scaleX, float scaleY);
 	rectangle();
-	rectangle (int newX, int newY, int newH, int newW);
+	rectangle (float newX, float newY, float newH, float newW);
 };

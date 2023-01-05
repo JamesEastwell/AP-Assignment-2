@@ -1,7 +1,12 @@
-#include"Shape.h"
-#include"Movable.h"
-#include"Square.h"
-
+#include "Shape.h"
+#include "Square.h"
+#include "Movable.h"
+#include "Point.h"
+#include <iostream>
+#include <ostream>
+#include <string>
+#include <string.h>
+#include <vector>
 using namespace std;
 
 square::square(int newX, int newY, int newE)
@@ -14,6 +19,7 @@ square::square(int newX, int newY, int newE)
 }
 square::square()
 {
+	edge = 0;
 	area = 0;
 	perimeter = 0;
 	point leftTop(0, 0);
@@ -30,7 +36,7 @@ float square::calculatePerimeter(int edge)
 	perimeter = edge * 4;
 	return perimeter;
 }
-point square::calculatePoints(int x, int y, int e)
+void square::calculatePoints(int x, int y, int e)
 {
 	//Pass in rightTop
 	point rightTop(x + e, y);
@@ -42,7 +48,17 @@ point square::calculatePoints(int x, int y, int e)
 	point leftBottom(x, y + e);
 	points.push_back(leftBottom);
 }
-void square::toString()
+void square::move(int newX, int newY)
 {
 
+}
+void square::scale(float scaleX, float scaleY)
+{
+
+}
+
+string square::toString()
+{
+	string output;
+	return output;
 }

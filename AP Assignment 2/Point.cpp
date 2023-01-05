@@ -1,4 +1,9 @@
 #include "Point.h"
+#include <iostream>
+#include <ostream>
+#include <string>
+#include <string.h>
+#include <vector>
 
 using namespace std;
 point::point()
@@ -12,13 +17,13 @@ point::point(int newX, int newY)
 	y = newY;
 	return;
 }
-void point::getX(int& newX) 
+int point::getX()
 {
-	newX = x;
+	return x;
 }
-void point::getY(int& newY)
+int point::getY()
 {
-	newY = y;
+	return y;
 }
 void point::setX(int newX)
 {

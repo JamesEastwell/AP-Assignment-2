@@ -1,4 +1,10 @@
 #pragma once
+#include "Movable.h"
+#include "Point.h"
+#include <iostream>
+#include <ostream>
+#include <string>
+#include <string.h>
 #include <vector>
 
 class shape
@@ -6,14 +12,15 @@ class shape
 protected:
 	float area;
 	bool isCircular;
-	point* leftTop = new point();
+	point *leftTop = new point(0,0);
 	float perimeter;
-	vector <point> points;
+	std::vector <point> points;
+
+	virtual float calculateArea()=0;
+	virtual float calculatePerimeter()=0;
+	virtual void calculatePoints()=0;
 public:
 	shape();
-	virtual float calculateArea();
-	virtual float calculatePerimeter();
-	virtual point calculatePoints();
-	virtual void toString();
-	friend ostream& operator<< (ostream& output, const shape& S);
+	virtual std::string toString()=0;
+	//friend ostream& operator<< (ostream& output, const shape& S);
 };
