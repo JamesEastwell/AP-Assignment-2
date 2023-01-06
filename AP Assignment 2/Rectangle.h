@@ -7,6 +7,7 @@
 #include <string>
 #include <string.h>
 #include <vector>
+
 using namespace std;
 
 class rectangle :  public shape, public movable

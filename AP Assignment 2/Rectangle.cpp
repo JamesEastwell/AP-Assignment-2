@@ -12,10 +12,8 @@ using namespace std;
 
 rectangle::rectangle(float newX, float newY, float newH, float newW)
 {
-	cout << "Creating Rectangle: " << newX<<"," << newY<<endl;
 	point leftTop(newX, newY);
 	points.push_back(leftTop);
-	cout << leftTop.getX()<<","<< leftTop.getY()<< endl;
 	height = newH;
 	width = newW;
 	area = calculateArea();
@@ -60,11 +58,23 @@ void rectangle::calculatePoints()
 }
 void rectangle::move(int newX, int newY) 
 {
-
+	point leftTop(newX, newY);
+	points.clear();
+	points.push_back(leftTop);
+	calculatePoints();
 }
 void rectangle::scale(float scaleX, float scaleY) 
 {
-
+	height = height * scaleY;
+	width = width * scaleX;
+	int tempX = points[0].getX();
+	int tempY = points[0].getY();
+	points.clear();
+	point leftTop(tempX, tempY);
+	points.push_back(leftTop);
+	calculatePoints();
+	calculateArea();
+	calculatePerimeter();
 }
 string rectangle::toString()
 {
