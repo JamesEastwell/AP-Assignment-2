@@ -34,4 +34,3 @@ shape::shape()
 	perimeter = 0.0;
 	points;
 }
-

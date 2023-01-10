@@ -148,18 +148,24 @@ int main()
 				cout << "Index does not exist." << endl;
 			}
 		}
-		else if (command.compare("display") == 0) {
+		else if (command.compare("display") == 0) 
+		{
 			// this is not given in our example, but why don't you implement a display function which shows all objects stored in shapes?
+
 		}
 		
 		// do any necessary postprocessing at the end of each loop...
 		// yes, there is some necessary postprocessing...
 		cout << endl << endl;
 		parameters.clear();
+		delete[] cstr;
 	}
 	cout << "There are " << shapes.size() << " shapes" << endl;
+	shape* newC = dynamic_cast<shape*>(shapes[0]);
+	cout << newC->toString() << endl;
 	cout << "Press any key to continue...";
 	std::getchar();
+	// delete all shapes
 
 	return 0;
 }

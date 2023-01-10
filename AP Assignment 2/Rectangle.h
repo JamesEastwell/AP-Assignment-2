@@ -12,7 +12,7 @@ using namespace std;
 
 class rectangle :  public shape, public movable
 {
-public:
+private:
 	float height;
 	float width;
 public:

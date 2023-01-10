@@ -22,5 +22,5 @@ protected:
 public:
 	shape();
 	virtual std::string toString()=0;
-	//friend ostream& operator<< (ostream& output, const shape& S);
+	//friend ostream& operator<< (ostream& output, shape& S);
 };
