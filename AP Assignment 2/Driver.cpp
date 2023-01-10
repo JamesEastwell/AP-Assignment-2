@@ -15,37 +15,46 @@ Otherwise, your code may not pass the test cases...
 GOOD LUCK!
 
 ------------------------------------------------------ */
-
+#pragma warning (disable : 4996)
 #include "Shape.h"
 #include "Circle.h"
 #include "Rectangle.h"
 #include "Square.h"
 #include "Movable.h"
-
+#include "Point.h"
 #include <iostream>
+#include <ostream>
 #include <string>
+#include <string.h>
+#include <vector>
 
 using namespace std;
 
 int main()
 {
 	string userCommand;
-	vector <Shape*> shapes;     // this one will hold your shapes
+	vector <shape*> shapes;     // this one will hold your shapes
 	vector <string> parameters; // this one will hold parameters for the commands
-
 
 	while (userCommand.compare("exit") != 0)
 	{
 		cout << "Enter the command: ";
 
 		getline(cin, userCommand);
-
+		
 		char* cstr = new char[userCommand.length() + 1];
 
 		strcpy_s(cstr, userCommand.length() + 1, userCommand.c_str());
-
+		
 		// implement a string tokenizer to populate the parameters vector 
 		// check function strtok_s
+		char d[] = " ";
+		char* portion = strtok(cstr, d);
+		while (portion != NULL)
+		{
+			parameters.push_back(portion);
+			portion = strtok(NULL, d);
+		}
 
 		// as a result of the process, parameters[0] should hold your command, followed by your parameters 
 		string command = parameters[0];
@@ -60,33 +69,38 @@ int main()
 			// note that the the parameters vector contains ascii values
 			// HINT: stoi function converts from string to int
 
-			x = parameters[1].c_str(); // fix me! also note that x is not previously defined :(
-			// int y = ...
-			// int h = ...
-			// int w = ...
+			int x = stoi(parameters[1].c_str()); // fix me! also note that x is not previously defined :(
+			int y = stoi(parameters[2].c_str());
+			int h = stoi(parameters[3].c_str());
+			int w = stoi(parameters[4].c_str());
 
-
-			Rectangle* r = new Rectangle(x, y, h, w);
+			rectangle* r = new rectangle(x, y, h, w);
 			shapes.push_back(r);
 			cout << r->toString(); /* instead of this, you may implement operator overloadig and
 									use cout << r which will give you additional points */
 		}
+		
 		else if (command.compare("addS") == 0) {
-			// get parameters
-			// ...
-			Square* s = new Square(x, y, e);
+			int x = stoi(parameters[1].c_str()); // fix me! also note that x is not previously defined :(
+			int y = stoi(parameters[2].c_str());
+			int e = stoi(parameters[3].c_str());
+
+			square* s = new square(x, y, e);
 			shapes.push_back(s);
 			cout << s->toString();
 		}
-
+		
 		if (command.compare("addC") == 0) {
-			// get parameters
-			// ...
-			Circle* c = new Circle(x, y, r);
+			int x = stoi(parameters[1].c_str()); // fix me! also note that x is not previously defined :(
+			int y = stoi(parameters[2].c_str());
+			int r = stoi(parameters[3].c_str());
+
+			circle* c = new circle(x, y, r);
 			shapes.push_back(c);
 			cout << c->toString();
 
 		}
+		
 		else if (command.compare("scale") == 0) {
 			// scale object at index... the scaling needs to be isotropic in case of circle and square 
 			// you may want to check if the index exists or not!
@@ -94,32 +108,56 @@ int main()
 			// Multiple inhertitance is tricky! The Shape class does nto have a scale function, the Movable does!
 			// As a result all your derived classes have scale functions... 
 			// You may need to use type casting wisely to use polymorphic functionality!
+			int shapeNo; // read from parameters
+			shapeNo = stoi(parameters[1]);
+			float x = stoi(parameters[2]);
+			float y = stoi(parameters[3]);
+			// you may want to check if the index exists or not!
+			if (shapeNo <= shapes.size())
+			{
+				movable* m = dynamic_cast<movable*>(shapes[shapeNo - 1]);
 
+				m->scale(x, y);
+				cout << shapes[shapeNo - 1]->toString();
+			}
+			else {
+				cout << "Index does not exist." << endl;
+			}
 		}
 		else if (command.compare("move") == 0) {
-			// move object at index 
+			// move object at index
 			int shapeNo; // read from parameters
+			shapeNo = stoi(parameters[1]);
+			int x = stoi(parameters[2]);
+			int y = stoi(parameters[3]);
 			// you may want to check if the index exists or not!
+			if (shapeNo <= shapes.size())
+			{
+				// Study the following code. A Shape object is not Movable, but all derived classes are...
+				// you can't automatically type cast from a Shape to a Movable, but you can force a downcasting
+				movable* m = dynamic_cast<movable*>(shapes[shapeNo - 1]);
 
-			// Study the following code. A Shape object is not Movable, but all derived classes are...
-			// you can't automatically type cast from a Shape to a Movable, but you can force a downcasting
-			Movable* m = dynamic_cast<Movable*>(shapes[shapeNo - 1]);
-			m->move(x, y);
-			// scale should work similarly...
+				m->move(x, y);
+				// scale should work similarly...
 
-			// note that here you should see the corresponding toString output for the derived classes...
-			// if toString is not a virtual function, you may see the base class functionality :(
-			cout << shapes[shapeNo - 1]->toString();
+				// note that here you should see the corresponding toString output for the derived classes...
+				// if toString is not a virtual function, you may see the base class functionality :(
+				cout << shapes[shapeNo - 1]->toString();
+			}
+			else {
+				cout << "Index does not exist." << endl;
+			}
 		}
 		else if (command.compare("display") == 0) {
 			// this is not given in our example, but why don't you implement a display function which shows all objects stored in shapes?
 		}
-
+		
 		// do any necessary postprocessing at the end of each loop...
 		// yes, there is some necessary postprocessing...
 		cout << endl << endl;
+		parameters.clear();
 	}
-
+	cout << "There are " << shapes.size() << " shapes" << endl;
 	cout << "Press any key to continue...";
 	std::getchar();
 

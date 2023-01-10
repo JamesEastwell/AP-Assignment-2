@@ -1,5 +1,7 @@
-#inlcude <iostream>
-#inlcude <fstream>
-#include <cstring>
-#include<vector>
-#include <algorithm>
+#include "Movable.h"
+#include "Point.h"
+#include <iostream>
+#include <ostream>
+#include <string>
+#include <string.h>
+#include <vector>

@@ -13,7 +13,16 @@
 //	calculatePoints
 //	toString
 #include "Shape.h"
+#include "Circle.h"
+#include "Rectangle.h"
+#include "Square.h"
+#include "Movable.h"
 #include "Point.h"
+#include <iostream>
+#include <ostream>
+#include <string>
+#include <string.h>
+#include <vector>
 
 using namespace std;
 
@@ -21,7 +30,8 @@ shape::shape()
 {
 	area = 0;
 	isCircular = false;
-	leftTop(0,0);
+	point leftTop();
 	perimeter = 0.0;
 	points;
 }
+
