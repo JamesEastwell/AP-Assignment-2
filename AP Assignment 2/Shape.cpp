@@ -34,3 +34,8 @@ shape::shape()
 	perimeter = 0.0;
 	points;
 }
+shape::~shape()
+{
+	cout << "delete shape" << endl;
+	delete[] leftTop;
+}

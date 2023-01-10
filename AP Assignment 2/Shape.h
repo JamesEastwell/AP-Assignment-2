@@ -21,6 +21,6 @@ protected:
 	virtual void calculatePoints()=0;
 public:
 	shape();
+	virtual ~shape();
 	virtual std::string toString()=0;
-	//friend ostream& operator<< (ostream& output, shape& S);
 };

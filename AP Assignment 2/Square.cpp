@@ -44,7 +44,7 @@ void square::calculatePoints()
 	//Pass in rightTop
 	int tempX = points[0].getX();
 	int tempY = points[0].getY();
-
+	
 	point rightTop(tempX + edge, tempY);
 	points.push_back(rightTop);
 	//Pass in rightBottom
@@ -75,10 +75,6 @@ void square::scale(float scaleX, float scaleY)
 }
 string square::toString()
 {
-	//Example:
-	//Rectangle[h=50,w=200] 
-	//Points[(100, 100)(300, 100)(300, 150)(100, 150)]
-	//Area = 10000.0 Perimeter = 500.0
 	string output = " ";
 	output = "Square[e=" + to_string(edge) +"]\nPoints[(" + to_string(points[0].getX()) + ", " + to_string(points[0].getY()) + ")(" + to_string(points[1].getX()) + ", " + to_string(points[1].getY()) + ")(" + to_string(points[2].getX()) + ", " + to_string(points[2].getY()) + ")(" + to_string(points[3].getX()) + ", " + to_string(points[3].getY()) + ")]\nArea = " + to_string(area) + " Perimeter = " + to_string(perimeter);
 	return output;
