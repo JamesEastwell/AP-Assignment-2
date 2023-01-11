@@ -1,17 +1,3 @@
-//Shape Class
-//Fields
-//	Area
-//	isCircular
-//	leftTop
-//	perimeter
-//	points
-//Methods
-//	calculateArea
-//		Abstract that will be overriden in the child classes
-//	calculatePerimeter
-//		Abstract that will be overriden in the child classes
-//	calculatePoints
-//	toString
 #include "Shape.h"
 #include "Circle.h"
 #include "Rectangle.h"
