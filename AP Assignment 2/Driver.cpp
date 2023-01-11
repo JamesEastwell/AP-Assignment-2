@@ -22,6 +22,7 @@ int main()
 	vector <shape*> shapes; 
 	// Vector of strings to hold all parameters from the user
 	vector <string> parameters; 
+	// Brief command list with parameters
 	cout << "Commands| Parameters"
 		"\n-------------------------------------------"
 		"\naddR \t|\tx \ty \th \tw"
