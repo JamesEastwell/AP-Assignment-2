@@ -18,11 +18,9 @@ int main()
 	// Initialsing values to store the input from the user
 	string userCommand;
 	// A vector to store the shapes
-	// This is taken as a pointer to stop constant copying of the shapes
 	vector <shape*> shapes; 
 	// Vector of strings to hold all parameters from the user
 	vector <string> parameters; 
-	// Brief command list with parameters
 	cout << "Commands| Parameters"
 		"\n-------------------------------------------"
 		"\naddR \t|\tx \ty \th \tw"
@@ -40,15 +38,14 @@ int main()
 		"\nclear\t|\tyes \tno"
 		"\n-------------------------------------------"
 		"\nexit \t|" << endl;
-	// While loop that will exit when the user types "exit" as a command
 	while ("exit" != userCommand)
 	{
 		cout<<"Enter the command: ";		
 
-		// Taking the input from the user and storing it in userCommand
+		// Taking user input
 		getline(cin, userCommand);
 
-		// Taking a pointer of a character array to allow the portions to be made
+		// Store input as char array
 		char* cstr = new char[userCommand.length() + 1];
 
 		// 
@@ -79,8 +76,7 @@ int main()
 		// etc. "addR", "move" or "exit"
 		string command = parameters[0];
 
-		// Following if statements to check what the command is
-		if ("addR" == command) {
+		if ("addR" == command) { // if statement to construct rectangle
 			// if statement to make sure the user hasnt inputted too few parameters
 			// if they have then they will not be allowed to progress and will be kicked back to making another command
 			if (parameters.size() >= 5) {
@@ -113,7 +109,7 @@ int main()
 		}
 		// This else if statement is the same as the last
 		// Only difference is that it will create a square instead of rectangle
-		else if ("addS" == command) {
+		else if ("addS" == command) { // if statement to construct a square
 			if (parameters.size() >= 4) { // This takes four parameters instead of the 5 that addR did as there is only edge not height and width
 				int x, y, e;
 				try {

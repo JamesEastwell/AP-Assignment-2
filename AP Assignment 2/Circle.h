@@ -7,7 +7,7 @@
 #include <string>
 #include <string.h>
 #include <vector>
-// Class definitions for rectangle
+// Class definitions for circle
 using namespace std;
 // Derived from shape and movable to allow it to obtain both member features
 class circle : public shape, public movable
@@ -21,10 +21,10 @@ private:
 	string toString();
 	void move(int newX, int newY);
 	void scale(float scaleX, float scaleY);
-// The functions that will need to be called outside of the shape are therefore made public
 public:
 	circle();
 	circle(int newX, int newY, int newR);
-	friend ostream& operator<<(ostream& os, circle& c);// Overload operator
+	// Overload operator as the original function of the operator cannot handle a custom type/class being passed into it
+	friend ostream& operator<<(ostream& os, circle& c);
 
 };
