@@ -76,3 +76,8 @@ std:: string circle::toString()
 	output = "Circle[r=" + to_string(radius) + "]\nPoints[(" + to_string(points[0].getX()) + ", " + to_string(points[0].getY()) + ")(" + to_string(points[1].getX()) + ", " + to_string(points[1].getY()) + ")]\nArea = " + to_string(area) + " Perimeter = " + to_string(perimeter);
 	return output;
 }
+ostream& operator<<(ostream& os, circle& c)
+{
+	os << c.toString();
+	return os;
+}

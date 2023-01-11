@@ -33,8 +33,8 @@ using namespace std;
 int main()
 {
 	string userCommand;
-	vector <shape*> shapes;     // this one will hold your shapes
-	vector <string> parameters; // this one will hold parameters for the commands
+	vector <shape*> shapes;     
+	vector <string> parameters; 
 
 	while ("exit" != userCommand)
 	{
@@ -46,8 +46,6 @@ int main()
 
 		strcpy_s(cstr, userCommand.length() + 1, userCommand.c_str());
 
-		// implement a string tokenizer to populate the parameters vector 
-		// check function strtok_s
 		char d[] = " ";
 		char* portion = strtok(cstr, d);
 		while (portion != NULL)
@@ -56,7 +54,6 @@ int main()
 			portion = strtok(NULL, d);
 		}
 
-		// as a result of the process, parameters[0] should hold your command, followed by your parameters 
 		if (parameters.size() == 0)
 		{
 			parameters.push_back(" ");
@@ -82,90 +79,156 @@ int main()
 				}
 				rectangle* r = new rectangle(x, y, h, w);
 				shapes.push_back(r);
-				std::cout << r->toString();
+				cout << *r;
 			}
 		}
 
 		else if ("addS" == command) {
-			int x = stoi(parameters[1].c_str()); // fix me! also note that x is not previously defined :(
-			int y = stoi(parameters[2].c_str());
-			int e = stoi(parameters[3].c_str());
-
-			square* s = new square(x, y, e);
-			shapes.push_back(s);
-			cout << s->toString();
+			if (parameters.size() >= 4) {
+				int x, y, e;
+				try {
+					//
+					x = parameters[1].c_str() != NULL ? stoi(parameters[1].c_str()) : 1;
+					y = parameters[2].c_str() != NULL ? stoi(parameters[2].c_str()) : 1;
+					e = parameters[3].c_str() != NULL ? stoi(parameters[3].c_str()) : 1;
+				}
+				catch (...) {
+					cout << "Not given proper input. Setting default values." << endl;
+					x = 1;
+					y = 1;
+					e = 1;
+				}
+				square* s = new square(x, y, e);
+				shapes.push_back(s);
+				cout << *s;
+			}
 		}
 
 		if ("addC" == command) {
-			int x = stoi(parameters[1].c_str()); // fix me! also note that x is not previously defined :(
-			int y = stoi(parameters[2].c_str());
-			int r = stoi(parameters[3].c_str());
-
-			circle* c = new circle(x, y, r);
-			shapes.push_back(c);
-			cout << c->toString();
-
+			if (parameters.size() >= 4) {
+				int x, y, r;
+				try {
+					//
+					x = parameters[1].c_str() != NULL ? stoi(parameters[1].c_str()) : 1;
+					y = parameters[2].c_str() != NULL ? stoi(parameters[2].c_str()) : 1;
+					r = parameters[3].c_str() != NULL ? stoi(parameters[3].c_str()) : 1;
+				}
+				catch (...) {
+					std::cout << "Not given proper input. Setting default values." << endl;
+					x = 1;
+					y = 1;
+					r = 1;
+				}
+				circle* c = new circle(x, y, r);
+				shapes.push_back(c);
+				cout << *c;
+			}
 		}
 
 		else if ("scale" == command) {
-			// scale object at index... the scaling needs to be isotropic in case of circle and square 
-			// you may want to check if the index exists or not!
+			if (parameters.size() >= 4) {
+				int shapeNo;
+				float x, y;
+				try {
+					//
+					shapeNo = parameters[1].c_str() != NULL ? stoi(parameters[1].c_str()) : 1;
+					x = parameters[2].c_str() != NULL ? stof(parameters[2].c_str()) : 1.0;
+					y = parameters[3].c_str() != NULL ? stof(parameters[3].c_str()) : 1.0;
+				}
+				catch (...) {
+					std::cout << "Not given proper input. Setting default scaling values of 1 and 1. No changes will be made." << endl;
+					shapeNo = 1;
+					x = 1;
+					y = 1;
+				}
+				if (shapeNo <= shapes.size())
+				{
+					movable* m = dynamic_cast<movable*>(shapes[shapeNo - 1]);
 
-			// Multiple inhertitance is tricky! The Shape class does nto have a scale function, the Movable does!
-			// As a result all your derived classes have scale functions... 
-			// You may need to use type casting wisely to use polymorphic functionality!
-			int shapeNo; // read from parameters
-			shapeNo = stof(parameters[1]);
-			float x = stof(parameters[2]);
-			float y = stof(parameters[3]);
-			// you may want to check if the index exists or not!
-			if (shapeNo <= shapes.size())
-			{
-				movable* m = dynamic_cast<movable*>(shapes[shapeNo - 1]);
-
-				m->scale(x, y);
-				cout << shapes[shapeNo - 1]->toString();
+					m->scale(x, y);
+					circle* c = dynamic_cast<circle*>(m);
+					if (c == nullptr)
+					{
+						cout << "not circle" << endl;
+						rectangle* r = dynamic_cast<rectangle*>(m);
+						if (r == nullptr) {
+							cout << "not rectangle" << endl;
+							square* s = dynamic_cast<square*>(m);
+							cout << *s;
+						}
+						else { cout << *r; }
+					}
+					else { cout << *c; }
+				}
+				else {
+					cout << "Index does not exist. Please enter a correct shape index." << endl;
+				}
 			}
-			else {
-				cout << "Index does not exist." << endl;
+			else
+			{
+				cout << "Not given proper input. Please make sure you fill all parameters." << endl;
 			}
 		}
 		else if ("move" == command) {
-			// move object at index
-			int shapeNo; // read from parameters
-			shapeNo = stoi(parameters[1]);
-			int x = stoi(parameters[2]);
-			int y = stoi(parameters[3]);
-			// you may want to check if the index exists or not!
-			if (shapeNo <= shapes.size())
-			{
-				// Study the following code. A Shape object is not Movable, but all derived classes are...
-				// you can't automatically type cast from a Shape to a Movable, but you can force a downcasting
-				movable* m = dynamic_cast<movable*>(shapes[shapeNo - 1]);
+			if (parameters.size() >= 4) {
+				int shapeNo, x, y;
+				try {
+					//
+					shapeNo = parameters[1].c_str() != NULL ? stoi(parameters[1].c_str()) : 1;
+					x = parameters[2].c_str() != NULL ? stoi(parameters[2].c_str()) : 1;
+					y = parameters[3].c_str() != NULL ? stoi(parameters[3].c_str()) : 1;
+				}
+				catch (...) {
+					std::cout << "Not given proper input. Setting default scaling values of 1 and 1. No changes will be made." << endl;
+					shapeNo = 1;
+					x = 1;
+					y = 1;
+				}
+				if (shapeNo <= shapes.size())
+				{
+					movable* m = dynamic_cast<movable*>(shapes[shapeNo - 1]);
 
-				m->move(x, y);
-				// scale should work similarly...
-
-				// note that here you should see the corresponding toString output for the derived classes...
-				// if toString is not a virtual function, you may see the base class functionality :(
-				cout << shapes[shapeNo - 1]->toString();
+					m->move(x, y);
+					circle* c = dynamic_cast<circle*>(m);
+					if (c == nullptr)
+					{
+						rectangle* r = dynamic_cast<rectangle*>(m);
+						if (r == nullptr) {
+							square* s = dynamic_cast<square*>(m);
+							cout << *s;
+						}
+						else { cout << *r; }
+					}
+					else { cout << *c; }
+				}
+				else {
+					cout << "Index does not exist. Please enter a correct shape index." << endl;
+				}
 			}
-			else {
-				cout << "Index does not exist." << endl;
+			else
+			{
+				cout << "Not given proper input. Please make sure you fill all parameters." << endl;
 			}
 		}
 		else if ("display" == command)
 		{
-			// this is not given in our example, but why don't you implement a display function which shows all objects stored in shapes?
 			for (int i = 0; i < shapes.size(); i++)
 			{
-				cout << "Shape number " << i + 1 <<" is:" << endl;
-				cout << shapes[i]->toString() << endl;
+				cout << "\nShape number " << i + 1 <<" is:" << endl;
+				circle* c = dynamic_cast<circle*>(shapes[i]);
+				if (c == nullptr)
+				{
+					rectangle* r = dynamic_cast<rectangle*>(shapes[i]);
+					if (r == nullptr) {
+						square* s = dynamic_cast<square*>(shapes[i]);
+						cout << *s;
+					}
+					else {cout << *r;}
+				}
+				else { cout << *c; }
 			}
 		}
 		
-		// do any necessary postprocessing at the end of each loop...
-		// yes, there is some necessary postprocessing...
 		cout << endl << endl;
 		parameters.clear();
 		delete[] cstr;

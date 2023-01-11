@@ -25,4 +25,5 @@ public:
 	void scale(float scaleX, float scaleY);
 	rectangle();
 	rectangle (float newX, float newY, float newH, float newW);
+	friend ostream& operator<<(ostream& os, rectangle& r);
 };

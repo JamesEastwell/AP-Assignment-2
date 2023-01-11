@@ -79,3 +79,8 @@ string square::toString()
 	output = "Square[e=" + to_string(edge) +"]\nPoints[(" + to_string(points[0].getX()) + ", " + to_string(points[0].getY()) + ")(" + to_string(points[1].getX()) + ", " + to_string(points[1].getY()) + ")(" + to_string(points[2].getX()) + ", " + to_string(points[2].getY()) + ")(" + to_string(points[3].getX()) + ", " + to_string(points[3].getY()) + ")]\nArea = " + to_string(area) + " Perimeter = " + to_string(perimeter);
 	return output;
 }
+ostream& operator<<(ostream& os, square &s)
+{
+	os << s.toString();
+	return os;
+}

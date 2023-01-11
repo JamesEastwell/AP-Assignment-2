@@ -23,4 +23,6 @@ public:
 	void scale(float scaleX, float scaleY);
 	circle();
 	circle(float newX, float newY, float newE);
+	friend ostream& operator<<(ostream& os, circle& c);
+
 };

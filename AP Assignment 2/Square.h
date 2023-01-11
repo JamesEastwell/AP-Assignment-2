@@ -23,4 +23,5 @@ public:
 	void scale(float scaleX, float scaleY);
 	square();
 	square(float newX, float newY, float newE);
+	friend ostream& operator<<(ostream& os, square &s);
 };
