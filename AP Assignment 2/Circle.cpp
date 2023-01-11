@@ -7,7 +7,7 @@
 #include <string>
 #include <string.h>
 #include <vector>
-
+// Circle function bodies
 using namespace std;
 
 circle::circle(int newX, int newY, int newR)
@@ -29,42 +29,51 @@ circle::circle() // default constructor
 	isCircular = true;
 	points.push_back(leftTop);
 }
-void circle::calculateArea() // area = pi *r^2
+// Overriding shapes::calculateArea
+// area = pi *r^2
+void circle::calculateArea() 
 {
 	area = 3.1415 * radius * radius;
 }
-void circle::calculatePerimeter() // perimeter = pi * diameter
+// Overriding shapes::calculatePerimeter
+// a circles perimeter is calculated by pi * diameter which is radius*2
+void circle::calculatePerimeter() 
 {
 	perimeter = 3.1415 * (radius * 2);
 }
-void circle::calculatePoints() // only two points are taken for a circle, the leftTop and rightBottom
+// Overriding shapes::calculatePoints
+// For circle it will only calculate one point, rightBottom. leftTop is already stored so therefore is not needed to be calculated again
+void circle::calculatePoints() 
 {
-	// Storing the values of leftTop in temporary variables which will allow the other points to be worked out
 	int tempX = points[0].getX();
 	int tempY = points[0].getY();
-	//Creating the rightBottom point and passing it in 
+	
 	point rightBottom(tempX + radius*2, tempY + radius*2);
 	points.push_back(rightBottom);
 }
-void circle::move(int newX, int newY) // creating circle's own function definitino for move 
+// Overriding movable::move, 
+// this method will create a new leftTop then clear and recalculate the other points based off of that and the radius
+void circle::move(int newX, int newY) 
 {
-	point leftTop(newX, newY); // creating new leftTop as it will be moved and used to work out the other point
-	points.clear(); // Clearing the other points as they will be replaced
-	points.push_back(leftTop); // readding leftTop
-	calculatePoints();// recalculating the other point
+	point leftTop(newX, newY); 
+	points.clear(); 
+	points.push_back(leftTop); 
+	calculatePoints();
 	// no need to recalculate the area or perimeter as they have not changed
 }
-void circle::scale(float scaleX, float scaleY) // creating cirlce's own function definition for scale
+// Overriding movable::scale, this method rescales the Circle based on the give scale factors
+// this only uses the modifier for X as since it is a cirlce it cannot be modified for both scales and needs to stay symmetrical
+void circle::scale(float scaleX, float scaleY) 
 {
-	radius = radius * scaleX; // timesing the radius by the scale factor
-	int tempX = points[0].getX(); // storing the leftTop a this will not change
+	radius = radius * scaleX; 
+	int tempX = points[0].getX(); // tempX and Y will store leftTop when the other points get cleared
 	int tempY = points[0].getY();
-	points.clear(); // clearing space for the new points
-	point leftTop(tempX, tempY); // creating and adding a new leftTop into points
+	points.clear(); // other points are cleared as they need to be recalculated
+	point leftTop(tempX, tempY);
 	points.push_back(leftTop);
-	calculatePoints(); // recalculating the points
-	calculateArea(); // recalcualting the area
-	calculatePerimeter(); // recalculating the perimeter
+	calculatePoints(); 
+	calculateArea(); 
+	calculatePerimeter(); 
 }
 std:: string circle::toString() // toString functiont that converts details into a string and returns it
 {
