@@ -23,9 +23,11 @@
 #include <string>
 #include <string.h>
 #include <vector>
-
+// Function bodies stored in the shape.cpp
+// No function bodies here as they are virtual and will be added in the derived classes
 using namespace std;
 
+// Constructor body
 shape::shape()
 {
 	area = 0;
@@ -34,8 +36,9 @@ shape::shape()
 	perimeter = 0.0;
 	points;
 }
+// Deconstructor body
 shape::~shape()
 {
-	cout << "delete shape" << endl;
+	// Since leftTop is allocated on heap, it will need to be destroyed when code ends
 	delete[] leftTop;
 }

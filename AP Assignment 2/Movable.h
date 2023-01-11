@@ -4,6 +4,7 @@
 #include <string>
 #include <string.h>
 #include <vector>
+// Movable class definition
 class movable
 {
 public:

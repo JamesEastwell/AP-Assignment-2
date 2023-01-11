@@ -27,58 +27,88 @@ GOOD LUCK!
 #include <string>
 #include <string.h>
 #include <vector>
+#include<iomanip>
 
 using namespace std;
 
 int main()
 {
+	// Initialsing values to store the input from the user
 	string userCommand;
-	vector <shape*> shapes;     
+	// A vector to store the shapes
+	// This is taken as a pointer to stop constant copying of the shapes
+	vector <shape*> shapes; 
+	// Vector of strings to hold all parameters from the user
 	vector <string> parameters; 
 
+	// While loop that will exit when the user types "exit" as a command
 	while ("exit" != userCommand)
 	{
 		cout << "Enter the command: ";
 
+		// Taking the input from the user and storing it in userCommand
 		getline(cin, userCommand);
 
+		// Taking a pointer of a character array to allow the portions to be made
 		char* cstr = new char[userCommand.length() + 1];
 
+		// 
 		strcpy_s(cstr, userCommand.length() + 1, userCommand.c_str());
-
+		// Setting the delimiter as a blank space
+		// This is done so the portions will be determined by the spaces inbetween each input
 		char d[] = " ";
+		// The method that will split the str into tokens (sequence of characters separated by the delimiter (blank spaces)
 		char* portion = strtok(cstr, d);
+		// A while loop to go through the entire input until the portion that is returned is null
 		while (portion != NULL)
 		{
+			// Adding the portion onto the parameters vector where all the commands are stored
 			parameters.push_back(portion);
 			portion = strtok(NULL, d);
 		}
-
+		
+		// Making the loop code null safe.
+		// If the size of parameters is null, then it will make the initial value of parameters = " "
+		// this will then mean that there will always be a value of parameters[0]
+		// meaning there will not be a vector subscript error
 		if (parameters.size() == 0)
 		{
 			parameters.push_back(" ");
+			cout << "Please enter a valid command" << endl;
 		}
+		// Making the command equal to parameters[0] 
+		// etc. "addR", "move" or "exit"
 		string command = parameters[0];
 
+		// Following if statements to check what the command is
 		if ("addR" == command) {
+			// if statement to make sure the user hasnt inputted too few parameters
+			// if they have then they will not be allowed to progress and will be kicked back to making another command
 			if (parameters.size() >= 5) {
+				// Initialising the variables that will be used to construct the rectangle
 				int x, y, h, w;
+				// Error handling to make sure that the user has inputted integers for their parameters
+				// if not, then it will be caught and they will be given default values and the shape will still be constructed
 				try {
-					//
+					// If all parameters that are inputted are integers then the variables will convert and store
 					x = parameters[1].c_str() != NULL ? stoi(parameters[1].c_str()) : 1;
 					y = parameters[2].c_str() != NULL ? stoi(parameters[2].c_str()) : 1;
 					h = parameters[3].c_str() != NULL ? stoi(parameters[3].c_str()) : 1;
 					w = parameters[4].c_str() != NULL ? stoi(parameters[4].c_str()) : 1;
 				}
 				catch (...) {
+					// Error caught and default values given
 					std::cout << "Not given proper input. Setting default values." << endl;
 					x = 1;
 					y = 1;
 					h = 1;
 					w = 1;
 				}
+				// The rectangle is created and the pointer is stored in r
 				rectangle* r = new rectangle(x, y, h, w);
+				// r is then added to the shapes vector
 				shapes.push_back(r);
+				// overloaded << to allow an output the rectangle r
 				cout << *r;
 			}
 		}

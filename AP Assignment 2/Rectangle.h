@@ -15,7 +15,6 @@ class rectangle :  public shape, public movable
 private:
 	float height;
 	float width;
-public:
 	float calculateArea();
 	float calculatePerimeter();
 	void calculatePoints();
@@ -23,6 +22,7 @@ public:
 	//create move and scale
 	void move(int newX, int newY);
 	void scale(float scaleX, float scaleY);
+public:
 	rectangle();
 	rectangle (float newX, float newY, float newH, float newW);
 	friend ostream& operator<<(ostream& os, rectangle& r);
